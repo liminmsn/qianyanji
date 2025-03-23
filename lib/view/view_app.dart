@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:qianyanji/view/app_view/app_dashborard.dart';
 
-class ViewHome extends StatefulWidget {
-  const ViewHome({super.key});
+class ViewApp extends StatefulWidget {
+  const ViewApp({super.key});
 
   @override
-  State<ViewHome> createState() => _ViewHomeState();
+  State<ViewApp> createState() => _ViewAppState();
 }
 
-class _ViewHomeState extends State<ViewHome> {
+class _ViewAppState extends State<ViewApp> {
   int _selectedIndex = 0;
 
   void _onItemTapped(int index) {
@@ -15,6 +16,8 @@ class _ViewHomeState extends State<ViewHome> {
       _selectedIndex = index;
     });
   }
+
+  final List<Widget> viewList = [AppDashborard(), AppDashborard()];
 
   @override
   Widget build(BuildContext context) {
@@ -30,8 +33,8 @@ class _ViewHomeState extends State<ViewHome> {
                 backgroundColor: Theme.of(context).colorScheme.primaryContainer,
                 destinations: [
                   NavigationRailDestination(
-                    icon: Icon(Icons.home),
-                    label: Text('Home'),
+                    icon: Icon(Icons.dashboard),
+                    label: Text('图集'),
                   ),
                   NavigationRailDestination(
                     icon: Icon(Icons.favorite),
@@ -44,7 +47,7 @@ class _ViewHomeState extends State<ViewHome> {
               Expanded(
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
-                  child: Text("hello"),
+                  child: viewList[_selectedIndex],
                 ),
               ),
             ],
