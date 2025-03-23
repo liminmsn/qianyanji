@@ -10,6 +10,23 @@ class AppDashborard extends StatefulWidget {
 class _AppDashborardState extends State<AppDashborard> {
   @override
   Widget build(BuildContext context) {
-    return Text("dash");
+    return Center(
+      child: Align(
+        child: ShaderMask(
+          shaderCallback: (Rect bounds) {
+            return RadialGradient(
+              center: Alignment.topLeft,
+              radius: 1,
+              tileMode: TileMode.repeated,
+              colors: [Colors.yellow, Colors.orange],
+            ).createShader(bounds);
+          },
+          child: const Text(
+            "hello world",
+            style: TextStyle(fontSize: 80, color: Colors.white),
+          ),
+        ),
+      ),
+    );
   }
 }

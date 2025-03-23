@@ -26,23 +26,38 @@ class _ViewAppState extends State<ViewApp> {
         builder: (BuildContext context, BoxConstraints constraints) {
           return Row(
             children: [
-              NavigationRail(
-                extended: constraints.maxWidth > 1000,
-                indicatorColor: Theme.of(context).colorScheme.onPrimary,
-                minExtendedWidth: 160,
-                backgroundColor: Theme.of(context).colorScheme.primaryContainer,
-                destinations: [
-                  NavigationRailDestination(
-                    icon: Icon(Icons.dashboard),
-                    label: Text('图集'),
-                  ),
-                  NavigationRailDestination(
-                    icon: Icon(Icons.favorite),
-                    label: Text('Favorites'),
-                  ),
-                ],
-                selectedIndex: _selectedIndex,
-                onDestinationSelected: _onItemTapped,
+              ShaderMask(
+                shaderCallback: (Rect bounds) {
+                  return RadialGradient(
+                    center: Alignment.topCenter,
+                    radius: 1,
+                    tileMode: TileMode.clamp,
+                    colors: [
+                      // Theme.of(context).colorScheme.primary,
+                      Theme.of(context).colorScheme.primaryContainer,
+                      Theme.of(context).colorScheme.inversePrimary,
+                    ],
+                  ).createShader(bounds);
+                },
+                child: NavigationRail(
+                  extended: constraints.maxWidth > 1000,
+                  indicatorColor: Theme.of(context).colorScheme.onPrimary,
+                  minExtendedWidth: 160,
+                  backgroundColor:
+                      Theme.of(context).colorScheme.primaryContainer,
+                  destinations: [
+                    NavigationRailDestination(
+                      icon: Icon(Icons.dashboard),
+                      label: Text('图集'),
+                    ),
+                    NavigationRailDestination(
+                      icon: Icon(Icons.favorite),
+                      label: Text('关于'),
+                    ),
+                  ],
+                  selectedIndex: _selectedIndex,
+                  onDestinationSelected: _onItemTapped,
+                ),
               ),
               Expanded(
                 child: Padding(
